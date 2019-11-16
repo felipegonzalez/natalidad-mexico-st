@@ -1,13 +1,27 @@
 [
   {
     "name": "ENT_REGIS",
-    "type": "INTEGER",
+    "type": "STRING",
     "mode": "NULLABLE",
     "fields": [],
     "description": ""
   },
   {
     "name": "MUN_REGIS",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "LOC_REGIS",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "TLOC_REGIS",
     "type": "INTEGER",
     "mode": "NULLABLE",
     "fields": [],
@@ -15,14 +29,21 @@
   },
   {
     "name": "ENT_RESID",
-    "type": "INTEGER",
+    "type": "STRING",
     "mode": "NULLABLE",
     "fields": [],
     "description": ""
   },
   {
     "name": "MUN_RESID",
-    "type": "INTEGER",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "LOC_RESID",
+    "type": "STRING",
     "mode": "NULLABLE",
     "fields": [],
     "description": ""
@@ -36,13 +57,27 @@
   },
   {
     "name": "ENT_OCURR",
-    "type": "INTEGER",
+    "type": "STRING",
     "mode": "NULLABLE",
     "fields": [],
     "description": ""
   },
   {
     "name": "MUN_OCURR",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "LOC_OCURR",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "TLOC_OCURR",
     "type": "INTEGER",
     "mode": "NULLABLE",
     "fields": [],
@@ -84,7 +119,7 @@
     "description": ""
   },
   {
-    "name": "MES_NAC",
+    "name": "MES_NACIM",
     "type": "INTEGER",
     "mode": "NULLABLE",
     "fields": [],
@@ -224,8 +259,50 @@
     "description": ""
   },
   {
+    "name": "SITLAB_MAD",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "SITLAB_PAD",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
     "name": "FUE_PRESE",
     "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "HORA_NAC",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "MINUTO_NAC",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "COMPARECIO",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "DIS_RE_OAX",
+    "type": "STRING",
     "mode": "NULLABLE",
     "fields": [],
     "description": ""

@@ -27,15 +27,15 @@ archivos_rds <- list.files(path = "../natalidad/datos/", full.names = TRUE) %>%
   keep( ~ str_detect(.x, "rds")) 
 archivos_rds_2 <- archivos_rds %>% keep(~str_detect(.x, "NACIM99|NACIM[0-1]"))
 
-# json schema
-dat <- read_rds(archivos_rds_2[1])
+# json schema - usar el último año
+dat <- read_rds(archivos_rds_2[18])
 nom_variables <- names(dat)
 fields <- as_bq_fields(dat)
 toJSON(bigrquery:::as_json(fields), pretty = TRUE, auto_unbox = TRUE)
 
 
 # crear datos json 
-archivos_rds_2[-1] %>% walk(function(archivo){
+archivos_rds_2 %>% walk(function(archivo){
   tbl <- read_rds(archivo)
   num <- str_extract(archivo, "[0-9].")
   tbl %>% stream_out(
