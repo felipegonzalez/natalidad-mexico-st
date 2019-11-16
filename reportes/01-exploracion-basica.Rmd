@@ -1,9 +1,10 @@
 ---
 title: "Ejemplo de consulta y exploración"
-output: html_notebook
+output: github_document
 ---
 
 ```{r}
+library(tidyverse)
 # autenticar con
 # bigrquery::bq_auth(use_oob = TRUE)
 # este debe quedarse fijo:
