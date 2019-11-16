@@ -19,11 +19,11 @@ archivos_dbf <- list.files(path = "./datos_unzip/", full.names = FALSE) %>%
 archivos_dbf %>% walk(function(archivo){
   print(archivo)
   dat <- read.dbf(paste0("./datos_salida/", archivo))
-  nombre <- str_split(archivo, "\\.")[[1]][1] %>% paste0(".csv")
+  nombre <- str_split(archivo, "\\.")[[1]][1] %>% paste0(".rds")
   write_rds(dat, paste0("./datos_salida/", nombre))
 })
 
-archivos_rds <- list.files(path = "../natalidad/datos/", full.names = TRUE) %>% 
+archivos_rds <- list.files(path = "./datos_salida/", full.names = TRUE) %>% 
   keep( ~ str_detect(.x, "rds")) 
 #archivos_rds_2 <- archivos_rds %>% keep(~str_detect(.x, "NACIM99|NACIM[0-1]"))
 #archivos_rds_3 <- archivos_rds %>% keep(function(x){!(x %in% archivos_rds_2)})
@@ -54,7 +54,7 @@ archivos_rds %>% walk(function(archivo){
            MUN_RESID = str_pad(MUN_RESID, 3, pad = "0"),
            ENT_OCURR = str_pad(ENT_OCURR, 2, pad = "0"),
            MUN_OCURR = str_pad(MUN_OCURR, 3, pad = "0")) %>% 
-    mutate_at(vars(one_of("LOC_RESID", "LOG_REGIS", "LOC_OCURR")), str_pad, 4, pad = "0") %>%  
+    mutate_at(vars(one_of("LOC_RESID", "LOC_REGIS", "LOC_OCURR")), str_pad, 4, pad = "0") %>%  
     mutate_at(vars(one_of("DIS_RE_OAX")), as.character)
   # arreglar años
   tbl <- tbl %>% 
