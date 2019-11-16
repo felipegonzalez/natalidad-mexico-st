@@ -34,10 +34,30 @@ fields <- as_bq_fields(dat)
 toJSON(bigrquery:::as_json(fields), pretty = TRUE, auto_unbox = TRUE)
 
 
-# crear datos json 
+# crear datos json y corregir tipos
 archivos_rds_2 %>% walk(function(archivo){
   tbl <- read_rds(archivo)
   num <- str_extract(archivo, "[0-9].")
+  # corregir errores
+  if("LOCAL_RESI" %in% names(tbl)){
+    tbl <- tbl %>% rename(LOC_RESID = LOCAL_RESI)
+  }
+  if("MES_NAC" %in% names(tbl)){
+    tbl <- tbl %>% rename(MES_NACIM = MES_NAC)
+  }
+  # usar relleno como archivos más recientes
+  tbl <- tbl %>% 
+    mutate(ENT_REGIS = str_pad(ENT_REGIS, 2, pad = "0"),
+           MUN_REGIS = str_pad(MUN_REGIS, 3, pad = "0"),
+           ENT_RESID = str_pad(ENT_RESID, 2, pad = "0"),
+           MUN_RESID = str_pad(MUN_RESID, 3, pad = "0"),
+           ENT_OCURR = str_pad(ENT_OCURR, 2, pad = "0"),
+           MUN_OCURR = str_pad(MUN_OCURR, 3, pad = "0")) %>% 
+    mutate_at(vars(one_of("LOC_RESID")), str_pad, 4, pad = "0") %>% 
+    mutate_at(vars(one_of("LOC_REGIS")), str_pad, 4, pad = "0") %>% 
+    mutate_at(vars(one_of("LOC_OCURR")), str_pad, 4, pad = "0") %>% 
+    mutate_at(vars(one_of("DIS_RE_OAX")), as.character)
+
   tbl %>% stream_out(
     con = file(glue("./json_data/nacimientos_{num}.json")), 
     null = c("list"),
