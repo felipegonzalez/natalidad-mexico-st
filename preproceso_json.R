@@ -25,7 +25,8 @@ archivos_dbf %>% walk(function(archivo){
 
 archivos_rds <- list.files(path = "../natalidad/datos/", full.names = TRUE) %>% 
   keep( ~ str_detect(.x, "rds")) 
-archivos_rds_2 <- archivos_rds %>% keep(~str_detect(.x, "NACIM99|NACIM[0-1]"))
+#archivos_rds_2 <- archivos_rds %>% keep(~str_detect(.x, "NACIM99|NACIM[0-1]"))
+#archivos_rds_3 <- archivos_rds %>% keep(function(x){!(x %in% archivos_rds_2)})
 
 # json schema - usar el último año
 dat <- read_rds(archivos_rds_2[18])
@@ -35,7 +36,7 @@ toJSON(bigrquery:::as_json(fields), pretty = TRUE, auto_unbox = TRUE)
 
 
 # crear datos json y corregir tipos
-archivos_rds_2 %>% walk(function(archivo){
+archivos_rds %>% walk(function(archivo){
   tbl <- read_rds(archivo)
   num <- str_extract(archivo, "[0-9].")
   # corregir errores
@@ -53,11 +54,12 @@ archivos_rds_2 %>% walk(function(archivo){
            MUN_RESID = str_pad(MUN_RESID, 3, pad = "0"),
            ENT_OCURR = str_pad(ENT_OCURR, 2, pad = "0"),
            MUN_OCURR = str_pad(MUN_OCURR, 3, pad = "0")) %>% 
-    mutate_at(vars(one_of("LOC_RESID")), str_pad, 4, pad = "0") %>% 
-    mutate_at(vars(one_of("LOC_REGIS")), str_pad, 4, pad = "0") %>% 
-    mutate_at(vars(one_of("LOC_OCURR")), str_pad, 4, pad = "0") %>% 
+    mutate_at(vars(one_of("LOC_RESID", "LOG_REGIS", "LOC_OCURR")), str_pad, 4, pad = "0") %>%  
     mutate_at(vars(one_of("DIS_RE_OAX")), as.character)
-
+  # arreglar años
+  tbl <- tbl %>% 
+    mutate(ANO_NAC = ifelse(ANO_NAC < 100, ANO_NAC + 1900, ANO_NAC),
+           ANO_REG = ifelse(ANO_REG < 100, ANO_REG + 1900, ANO_REG))
   tbl %>% stream_out(
     con = file(glue("./json_data/nacimientos_{num}.json")), 
     null = c("list"),
