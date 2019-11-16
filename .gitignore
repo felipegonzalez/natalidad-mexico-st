@@ -6,4 +6,5 @@ packrat/lib*/
 tmp/
 .DS_Store
 json_data/
+cache/
 

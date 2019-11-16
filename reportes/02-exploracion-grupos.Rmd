@@ -1,0 +1,77 @@
+---
+title: "Descomposición de serie diaria"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(lubridate)
+use_cache <- TRUE
+if(!use_cache){
+  proyecto_dset <- "decent-oxygen-259223"
+  billing <-  "decent-oxygen-259223"
+  con <- DBI::dbConnect(
+    bigrquery::bigquery(),
+    project = proyecto_dset,
+    dataset = "natalidad_mexico_1985_2017",
+    billing = billing
+  )
+  nac_tbl <- tbl(con, "nacimientos")
+}
+```
+
+```{r, message = FALSE}
+if(!use_cache){
+  dia_tbl <- nac_tbl %>% filter(ANO_NAC < 2018) %>% 
+    filter(ANO_NAC != 9999, MES_NACIM != 99, DIA_NAC!= 99, !is.na(DIA_NAC)) %>% 
+    mutate(edad_madre = ifelse(EDAD_MADN < 19, "Menor_19", 
+                               ifelse(EDAD_MADN!=99, "Mayor_18", "No especificada"))) %>% 
+    mutate(escolaridad_madre = ifelse(ESCOL_MAD %in% c(1,2,3,4,9), "Baja", "Media-Alta")) %>% 
+    group_by(ANO_NAC, MES_NACIM, DIA_NAC, edad_madre, escolaridad_madre) %>% 
+    tally() %>% collect()
+  write_rds(dia_tbl, "../cache/dia_tbl.rds")
+} else {
+  dia_tbl <- read_rds("../cache/dia_tbl.rds")
+}
+```
+
+
+
+```{r}
+anual <- dia_tbl %>% filter(ANO_NAC >= 1999) %>% 
+  group_by(ANO_NAC, edad_madre, escolaridad_madre) %>% 
+  summarise(n = sum(n))
+ggplot(anual, aes(x = ANO_NAC, y = n / 1000, colour = edad_madre)) +
+  geom_line() +
+  geom_point() +
+  facet_wrap(~escolaridad_madre, ncol = 1) + 
+  ylab("Nacimientos (000)") + 
+  scale_x_continuous(breaks = seq(2000,2017,2)) +
+  theme(axis.text.x = element_text(angle = 90)) +
+  scale_y_sqrt(breaks = c(100, 200, 400, 800))
+```
+
+
+
+
+## Agrupamiento por día
+
+```{r}
+dia_fecha <- dia_tbl %>% 
+    unite(fecha_str, ANO_NAC, MES_NACIM, DIA_NAC, sep="-") %>%
+    mutate(fecha = lubridate::ymd(fecha_str)) 
+# número de nacimientos con fecha incorrecta
+dia_fecha %>% filter(is.na(fecha)) %>% 
+  summarise(n = sum(n))
+```
+
+
+
+```{r}
+dia_fecha <- dia_fecha %>% filter(!is.na(fecha)) %>% 
+  filter(edad_madre != "No especificada") %>% 
+  filter(fecha >= ymd("1999-01-01")) %>% 
+  select(fecha, edad_madre, escolaridad_madre, n) %>% 
+  arrange(fecha)
+dia_fecha
+```
