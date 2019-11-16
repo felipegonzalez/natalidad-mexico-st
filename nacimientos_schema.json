@@ -1,0 +1,233 @@
+[
+  {
+    "name": "ENT_REGIS",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "MUN_REGIS",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "ENT_RESID",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "MUN_RESID",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "TLOC_RESID",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "ENT_OCURR",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "MUN_OCURR",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "SEXO",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "EDAD_REG",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "EDAD_MADN",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "EDAD_PADN",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "DIA_NAC",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "MES_NAC",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "ANO_NAC",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "DIA_REG",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "MES_REG",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "ANO_REG",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "EDAD_MADR",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "EDAD_PADR",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "TIPO_NAC",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "ORDEN_PART",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "LUGAR_PART",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "Q_ATENDIO",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "HIJOS_VIVO",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "HIJOS_SOBR",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "EDOCIV_MAD",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "ESCOL_MAD",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "ESCOL_PAD",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "ACT_MAD",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "ACT_PAD",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "POS_MAD",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "POS_PAD",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  },
+  {
+    "name": "FUE_PRESE",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "fields": [],
+    "description": ""
+  }
+] 
