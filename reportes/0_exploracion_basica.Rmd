@@ -1,0 +1,42 @@
+---
+title: "Ejemplo de consulta y exploración"
+output: html_notebook
+---
+
+```{r}
+# autenticar con
+# bigrquery::bq_auth(use_oob = TRUE)
+# este debe quedarse fijo:
+proyecto_dset <- "decent-oxygen-259223"
+# cambiar billing a tu cuenta:
+billing <-  "decent-oxygen-259223"
+# conectar
+con <- DBI::dbConnect(
+  bigrquery::bigquery(),
+  project = proyecto_dset,
+  dataset = "natalidad_mexico_1985_2017",
+  billing = billing
+)
+```
+
+```{r, message = FALSE}
+nac_tbl <- tbl(con, "nacimientos")
+total_año_reg <- nac_tbl %>% group_by(ANO_REG) %>% tally() %>% collect()
+total_año_reg %>% arrange(ANO_REG)
+```
+
+
+
+```{r, message=FALSE}
+nacimientos_año <- nac_tbl %>% 
+  group_by(ANO_NAC, SEXO) %>% tally() %>% collect()
+nac_anual <- nacimientos_año %>% 
+  filter(ANO_NAC > 1985, ANO_NAC <= 2017) %>% 
+  arrange(ANO_NAC)
+```
+
+```{r}
+ggplot(nac_anual %>% filter(SEXO!=9), 
+       aes(x = ANO_NAC, y = n, colour = factor(SEXO), group = SEXO)) + 
+  geom_point() + geom_line() 
+```
